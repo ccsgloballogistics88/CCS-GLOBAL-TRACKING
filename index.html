@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CCS GLOBAL - Shipment Tracking</title>
+
+<style>
+
+/* =========================
+   CCS GLOBAL COLORS
+   Orange : #F58220
+   Blue   : #123B5D
+   White  : #FFFFFF
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6f8;
+    color: #123B5D;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    height: 78px;
+    background: #123B5D;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-box {
+    width: 45px;
+    height: 45px;
+
+    background: #F58220;
+    color: white;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.logo-text {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo-text span {
+    color: #F58220;
+}
+
+.header-right {
+    font-size: 13px;
+    opacity: 0.85;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    background:
+        linear-gradient(
+            135deg,
+            #123B5D 0%,
+            #174F78 65%,
+            #F58220 100%
+        );
+
+    padding: 70px 20px 100px;
+
+    text-align: center;
+
+    color: white;
+}
+
+.hero h1 {
+    margin: 0;
+
+    font-size: 43px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+}
+
+.hero p {
+    margin-top: 12px;
+
+    font-size: 16px;
+
+    opacity: 0.9;
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.tracking-card {
+
+    max-width: 850px;
+
+    margin: -55px auto 55px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 12px 35px rgba(18,59,93,0.15);
+
+    position: relative;
+}
+
+
+/* Orange top line */
+
+.tracking-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 5px;
+
+    background: #F58220;
+
+    border-radius:
+        18px 18px 0 0;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-title {
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    color: #123B5D;
+
+    margin-bottom: 18px;
+}
+
+.search {
+
+    display: flex;
+
+    gap: 12px;
+}
+
+input {
+
+    flex: 1;
+
+    padding: 17px 18px;
+
+    font-size: 16px;
+
+    border: 1px solid #d8e0e6;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    color: #123B5D;
+
+    transition: 0.2s;
+}
+
+input::placeholder {
+    color: #9aa7b1;
+}
+
+input:focus {
+
+    border-color: #F58220;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(245,130,32,0.13);
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+
+    padding: 0 30px;
+
+    background: #F58220;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    transition: 0.2s;
+}
+
+button:hover {
+
+    background: #df7014;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(245,130,32,0.3);
+}
+
+button:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+
+    display: none;
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #71808c;
+
+    font-size: 14px;
+}
+
+.spinner {
+
+    width: 24px;
+    height: 24px;
+
+    border: 3px solid #e5ebef;
+
+    border-top:
+        3px solid #F58220;
+
+    border-radius: 50%;
+
+    animation:
+        spin 0.8s linear infinite;
+
+    margin:
+        0 auto 10px;
+}
+
+@keyframes spin {
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error {
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: #fff4f1;
+
+    border: 1px solid #ffd8cc;
+
+    color: #d84a25;
+
+    display: none;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result {
+
+    margin-top: 35px;
+
+    display: none;
+}
+
+.result-title {
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: #123B5D;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.result-title::before {
+
+    content: "";
+
+    width: 5px;
+
+    height: 22px;
+
+    background: #F58220;
+
+    border-radius: 5px;
+}
+
+
+/* =========================
+   INFORMATION GRID
+========================= */
+
+.info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.info-box {
+
+    background: #f8fafb;
+
+    border: 1px solid #e5ebef;
+
+    border-radius: 12px;
+
+    padding: 19px;
+
+    transition: 0.2s;
+}
+
+.info-box:hover {
+
+    border-color: #F58220;
+
+    transform:
+        translateY(-2px);
+}
+
+.label {
+
+    display: block;
+
+    font-size: 11px;
+
+    color: #7b8994;
+
+    margin-bottom: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    font-weight: 600;
+}
+
+.value {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #123B5D;
+
+    word-break: break-word;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    background: #eaf3f9;
+
+    color: #123B5D;
+
+    border: 1px solid #d3e5f0;
+}
+
+
+/* =========================
+   NEXT STEP
+========================= */
+
+.next-step {
+
+    margin-top: 18px;
+
+    padding: 21px;
+
+    border-radius: 12px;
+
+    background: #fff8f2;
+
+    border-left:
+        5px solid #F58220;
+
+    position: relative;
+}
+
+.next-title {
+
+    font-size: 11px;
+
+    color: #8a949b;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+}
+
+.next-value {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #123B5D;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+
+    background: #123B5D;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 28px 20px;
+
+    font-size: 13px;
+}
+
+.footer span {
+
+    color: #F58220;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .header {
+
+        height: 70px;
+
+        padding: 0 20px;
+    }
+
+    .header-right {
+
+        display: none;
+    }
+
+    .hero {
+
+        padding:
+            50px 20px 80px;
+    }
+
+    .hero h1 {
+
+        font-size: 31px;
+    }
+
+    .hero p {
+
+        font-size: 14px;
+    }
+
+    .tracking-card {
+
+        margin:
+            -40px 15px 35px;
+
+        padding:
+            28px 20px;
+    }
+
+    .search {
+
+        flex-direction: column;
+    }
+
+    button {
+
+        height: 52px;
+    }
+
+    .info-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media (max-width: 380px) {
+
+    .logo-text {
+
+        font-size: 18px;
+    }
+
+    .hero h1 {
+
+        font-size: 27px;
+    }
+
+}
+
+
+/* =========================
+   STATUS COLORS
+========================= */
+
+.status[data-status="Complete"] {
+
+    background: #e8f7ee;
+    color: #16834b;
+    border-color: #c9ecd9;
+}
+
+.status[data-status="Problem"] {
+
+    background: #fff0f0;
+    color: #d93025;
+    border-color: #ffd0d0;
+}
+
+.status[data-status="Pending"] {
+
+    background: #fff7e8;
+    color: #b56b00;
+    border-color: #ffe1a8;
+}
+
+.status[data-status="In Transit"] {
+
+    background: #eaf3f9;
+    color: #123B5D;
+    border-color: #cfe3ef;
+}
+
+.status[data-status="Arrived Port"] {
+
+    background: #f0edff;
+    color: #5c45a8;
+    border-color: #ddd5ff;
+}
+
+.status[data-status="Discharging"] {
+
+    background: #fff1e5;
+    color: #d96c00;
+    border-color: #ffd8b8;
+}
+
+.status[data-status="Discharged"] {
+
+    background: #e8f7ee;
+    color: #16834b;
+    border-color: #c9ecd9;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header">
+
+    <div class="logo">
+
+        <div class="logo-box">
+            CCS
+        </div>
+
+        <div class="logo-text">
+            CCS <span>GLOBAL</span>
+        </div>
+
+    </div>
+
+    <div class="header-right">
+        Shipment Tracking Portal
+    </div>
+
+</div>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<div class="hero">
+
+    <h1>
+        Shipment Tracking
+    </h1>
+
+    <p>
+        Track your shipment status anytime, anywhere.
+    </p>
+
+</div>
+
+
+<!-- =========================
+     TRACKING CARD
+========================= -->
+
+<div class="tracking-card">
+
+    <div class="search-title">
+        Track Your Container
+    </div>
+
+
+    <div class="search">
+
+        <input
+            type="text"
+            id="containerNo"
+            placeholder="Enter Container No."
+            onkeydown="if(event.key === 'Enter') trackContainer()"
+        >
+
+        <button onclick="trackContainer()">
+            TRACK
+        </button>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <div
+        class="loading"
+        id="loading">
+
+        <div class="spinner"></div>
+
+        Searching shipment...
+
+    </div>
+
+
+    <!-- ERROR -->
+
+    <div
+        class="error"
+        id="error">
+
+        Container Not Found
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div
+        class="result"
+        id="result">
+
+
+        <div class="result-title">
+
+            Shipment Information
+
+        </div>
+
+
+        <div class="info-grid">
+
+
+            <!-- CONTAINER -->
+
+            <div class="info-box">
+
+                <span class="label">
+                    Container No.
+                </span>
+
+                <span
+                    class="value"
+                    id="showContainer">
+                </span>
+
+            </div>
+
+
+            <!-- CUSTOMER -->
+
+            <div class="info-box">
+
+                <span class="label">
+                    Customer
+                </span>
+
+                <span
+                    class="value"
+                    id="customer">
+                </span>
+
+            </div>
+
+
+            <!-- ETA -->
+
+            <div class="info-box">
+
+                <span class="label">
+                    ETA
+                </span>
+
+                <span
+                    class="value"
+                    id="eta">
+                </span>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="info-box">
+
+                <span class="label">
+                    Status
+                </span>
+
+                <span
+                    class="status"
+                    id="status">
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- NEXT STEP -->
+
+        <div class="next-step">
+
+            <div class="next-title">
+
+                Next Step
+
+            </div>
+
+            <div
+                class="next-value"
+                id="nextStep">
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+    © 2026
+    <span>CCS GLOBAL</span>
+    · Shipment Tracking System
+
+</div>
+
+
+
+<script>
+
+
+async function trackContainer() {
+
+
+    const container =
+        document
+        .getElementById("containerNo")
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    if (!container) {
+
+        document
+        .getElementById("error")
+        .innerText =
+            "Please enter a container number.";
+
+        document
+        .getElementById("error")
+        .style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* =========================
+       YOUR GOOGLE APPS SCRIPT
+    ========================= */
+
+    const API =
+        "https://script.google.com/macros/s/AKfycbwO-sw5j1dl_UvLLX7H-zPlTPtaUQNVU7uN4l-A79uoS6pm3mkaQ-4LmS-7XOtQMcGs/exec";
+
+
+    const resultBox =
+        document
+        .getElementById("result");
+
+
+    const errorBox =
+        document
+        .getElementById("error");
+
+
+    const loadingBox =
+        document
+        .getElementById("loading");
+
+
+    /* SHOW LOADING */
+
+    resultBox.style.display =
+        "none";
+
+    errorBox.style.display =
+        "none";
+
+    loadingBox.style.display =
+        "block";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                API +
+                "?container=" +
+                encodeURIComponent(container)
+            );
+
+
+        const data =
+            await response.json();
+
+
+        /* HIDE LOADING */
+
+        loadingBox.style.display =
+            "none";
+
+
+        /* CONTAINER NOT FOUND */
+
+        if (data.error) {
+
+            resultBox.style.display =
+                "none";
+
+            errorBox.innerText =
+                "Container Not Found";
+
+            errorBox.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        /* HIDE ERROR */
+
+        errorBox.style.display =
+            "none";
+
+
+        /* =========================
+           SHOW DATA
+        ========================= */
+
+        document
+        .getElementById("showContainer")
+        .innerText =
+            data.container;
+
+
+        document
+        .getElementById("customer")
+        .innerText =
+            data.customer;
+
+
+        document
+        .getElementById("eta")
+        .innerText =
+            data.eta;
+
+
+        document
+        .getElementById("status")
+        .innerText =
+            data.status;
+
+
+        document
+        .getElementById("status")
+        .setAttribute(
+            "data-status",
+            data.status
+        );
+
+
+        document
+        .getElementById("nextStep")
+        .innerText =
+            data.nextStep;
+
+
+        /* SHOW RESULT */
+
+        resultBox.style.display =
+            "block";
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(error);
+
+
+        loadingBox.style.display =
+            "none";
+
+
+        resultBox.style.display =
+            "none";
+
+
+        errorBox.innerText =
+            "Unable to connect to tracking system";
+
+
+        errorBox.style.display =
+            "block";
+
+
+    }
+
+
+}
+
+</script>
+
+
+</body>
+</html>
