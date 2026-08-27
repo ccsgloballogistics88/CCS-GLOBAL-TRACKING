@@ -138,9 +138,6 @@ body {
         rgba(18,59,93,0.18);
 }
 
-
-/* Orange top */
-
 .tracking-card::before {
 
     content: "";
@@ -464,6 +461,48 @@ button:active {
    STATUS COLORS
 ========================= */
 
+.status[data-status="In Transit"] {
+
+    background: #eaf3f9;
+    color: #123B5D;
+    border-color: #cfe3ef;
+}
+
+.status[data-status="Stacking"] {
+
+    background: #fff7e8;
+    color: #b56b00;
+    border-color: #ffe1a8;
+}
+
+.status[data-status="Checking"] {
+
+    background: #f0edff;
+    color: #5c45a8;
+    border-color: #ddd5ff;
+}
+
+.status[data-status="Custom Clearance"] {
+
+    background: #fff1e5;
+    color: #d96c00;
+    border-color: #ffd8b8;
+}
+
+.status[data-status="Gate In"] {
+
+    background: #eaf7f0;
+    color: #16834b;
+    border-color: #c9ecd9;
+}
+
+.status[data-status="Gate Out"] {
+
+    background: #e8f2ff;
+    color: #2467a8;
+    border-color: #c9ddf5;
+}
+
 .status[data-status="Complete"] {
 
     background: #e8f7ee;
@@ -476,41 +515,6 @@ button:active {
     background: #fff0f0;
     color: #d93025;
     border-color: #ffd0d0;
-}
-
-.status[data-status="Pending"] {
-
-    background: #fff7e8;
-    color: #b56b00;
-    border-color: #ffe1a8;
-}
-
-.status[data-status="In Transit"] {
-
-    background: #eaf3f9;
-    color: #123B5D;
-    border-color: #cfe3ef;
-}
-
-.status[data-status="Arrived Port"] {
-
-    background: #f0edff;
-    color: #5c45a8;
-    border-color: #ddd5ff;
-}
-
-.status[data-status="Discharging"] {
-
-    background: #fff1e5;
-    color: #d96c00;
-    border-color: #ffd8b8;
-}
-
-.status[data-status="Discharged"] {
-
-    background: #e8f7ee;
-    color: #16834b;
-    border-color: #c9ecd9;
 }
 
 
@@ -569,16 +573,96 @@ button:active {
 
     text-align: center;
 
-    padding: 28px 20px;
+    padding: 35px 20px;
 
     font-size: 13px;
 }
 
-.footer span {
+.footer-company {
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    margin-bottom: 18px;
+}
+
+.footer-title {
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 20px;
+
+    opacity: 0.75;
+}
+
+.footer-contacts {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 70px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 22px;
+}
+
+.contact-person {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    min-width: 150px;
+}
+
+.contact-person strong {
+
+    color: #ffffff;
+
+    font-size: 15px;
+}
+
+.footer a {
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+.footer a:hover {
 
     color: #F58220;
+}
 
-    font-weight: bold;
+.footer-email {
+
+    margin-bottom: 20px;
+}
+
+.footer-copy {
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.15);
+
+    font-size: 12px;
+
+    opacity: 0.7;
 }
 
 
@@ -647,6 +731,15 @@ button:active {
     .info-grid {
 
         grid-template-columns: 1fr;
+    }
+
+    .footer-contacts {
+
+        flex-direction: column;
+
+        gap: 18px;
+
+        align-items: center;
     }
 
 }
@@ -892,9 +985,86 @@ button:active {
 
 <div class="footer">
 
-    © 2026
-    <span>CCS GLOBAL LOGISTICS SDN. BHD.</span>
-    · Shipment Tracking System
+    <div class="footer-company">
+        CCS GLOBAL LOGISTICS SDN. BHD.
+    </div>
+
+    <div class="footer-title">
+        Contact Us
+    </div>
+
+
+    <div class="footer-contacts">
+
+
+        <div class="contact-person">
+
+            <strong>Leon</strong>
+
+            <a
+                href="https://wa.me/60167370418"
+                target="_blank">
+
+                💬 WhatsApp Leon
+
+            </a>
+
+        </div>
+
+
+        <div class="contact-person">
+
+            <strong>Lim Ying Keong</strong>
+
+            <a
+                href="https://wa.me/60187776979"
+                target="_blank">
+
+                💬 WhatsApp Lim Ying Keong
+
+            </a>
+
+        </div>
+
+
+        <div class="contact-person">
+
+            <strong>Jayden</strong>
+
+            <a
+                href="https://wa.me/60133337933"
+                target="_blank">
+
+                💬 WhatsApp Jayden
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-email">
+
+        ✉️
+
+        <a
+            href="mailto:shipping@ccs-gl.com">
+
+            shipping@ccs-gl.com
+
+        </a>
+
+    </div>
+
+
+    <div class="footer-copy">
+
+        ©️ 2026 CCS GLOBAL LOGISTICS SDN. BHD.
+        · Shipment Tracking System
+
+    </div>
 
 </div>
 
