@@ -28,13 +28,10 @@ body {
 .header {
     height: 85px;
     background: #ffffff;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 7%;
-
     border-bottom: 1px solid #e5e5e5;
 }
 
@@ -119,7 +116,7 @@ body {
 
 .tracking-card {
 
-    max-width: 850px;
+    max-width: 900px;
 
     margin: -60px auto 60px;
 
@@ -562,6 +559,242 @@ button:active {
 
 
 /* =========================
+   SHIPMENT PROGRESS
+========================= */
+
+.progress-section {
+
+    margin-top: 25px;
+
+    padding: 25px 20px;
+
+    background: #f8fafb;
+
+    border: 1px solid #e5ebef;
+
+    border-radius: 14px;
+}
+
+.progress-title {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #123B5D;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    margin-bottom: 25px;
+
+    text-align: center;
+}
+
+.progress-timeline {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    width: 100%;
+}
+
+.progress-step {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    min-width: 75px;
+
+    position: relative;
+}
+
+.progress-dot {
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #e5ebef;
+
+    color: #9aa7b1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    border: 2px solid #d8e0e6;
+}
+
+.progress-label {
+
+    margin-top: 9px;
+
+    font-size: 10px;
+
+    color: #8a949b;
+
+    text-align: center;
+
+    line-height: 1.3;
+
+    max-width: 85px;
+}
+
+.progress-line {
+
+    height: 3px;
+
+    background: #e5ebef;
+
+    flex: 1;
+
+    margin-top: 14px;
+
+    min-width: 15px;
+}
+
+
+/* COMPLETED */
+
+.progress-step.completed .progress-dot {
+
+    background: #e8f7ee;
+
+    color: #16834b;
+
+    border-color: #c9ecd9;
+}
+
+.progress-step.completed .progress-label {
+
+    color: #16834b;
+
+    font-weight: 700;
+}
+
+.progress-line.completed {
+
+    background: #16834b;
+}
+
+
+/* CURRENT */
+
+.progress-step.current .progress-dot {
+
+    background: #F58220;
+
+    color: white;
+
+    border-color: #F58220;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(245,130,32,0.12);
+}
+
+.progress-step.current .progress-label {
+
+    color: #F58220;
+
+    font-weight: 700;
+}
+
+
+/* =========================
+   SHIPMENT DETAILS
+========================= */
+
+.details-section {
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5ebef;
+
+    border-radius: 14px;
+}
+
+.details-title {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #123B5D;
+
+    margin-bottom: 18px;
+}
+
+.details-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.detail-box {
+
+    background: #f8fafb;
+
+    border: 1px solid #e5ebef;
+
+    border-radius: 10px;
+
+    padding: 16px;
+}
+
+.detail-label {
+
+    display: block;
+
+    font-size: 10px;
+
+    color: #7b8994;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+}
+
+.detail-value {
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #123B5D;
+
+}
+
+
+/* =========================
    FOOTER
 ========================= */
 
@@ -731,6 +964,23 @@ button:active {
     .info-grid {
 
         grid-template-columns: 1fr;
+    }
+
+    .details-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .progress-section {
+
+        overflow-x: auto;
+
+        padding: 22px 15px;
+    }
+
+    .progress-timeline {
+
+        min-width: 650px;
     }
 
     .footer-contacts {
@@ -974,6 +1224,246 @@ button:active {
         </div>
 
 
+        <!-- =========================
+             SHIPMENT PROGRESS
+        ========================= -->
+
+        <div class="progress-section">
+
+            <div class="progress-title">
+
+                Shipment Progress
+
+            </div>
+
+
+            <div class="progress-timeline">
+
+
+                <div
+                    class="progress-step"
+                    data-step="In Transit">
+
+                    <div class="progress-dot">
+                        ✓
+                    </div>
+
+                    <div class="progress-label">
+                        In Transit
+                    </div>
+
+                </div>
+
+
+                <div class="progress-line"></div>
+
+
+                <div
+                    class="progress-step"
+                    data-step="Stacking">
+
+                    <div class="progress-dot">
+                        ✓
+                    </div>
+
+                    <div class="progress-label">
+                        Stacking
+                    </div>
+
+                </div>
+
+
+                <div class="progress-line"></div>
+
+
+                <div
+                    class="progress-step"
+                    data-step="Checking">
+
+                    <div class="progress-dot">
+                        ✓
+                    </div>
+
+                    <div class="progress-label">
+                        Checking
+                    </div>
+
+                </div>
+
+
+                <div class="progress-line"></div>
+
+
+                <div
+                    class="progress-step"
+                    data-step="Custom Clearance">
+
+                    <div class="progress-dot">
+                        ✓
+                    </div>
+
+                    <div class="progress-label">
+                        Custom Clearance
+                    </div>
+
+                </div>
+
+
+                <div class="progress-line"></div>
+
+
+                <div
+                    class="progress-step"
+                    data-step="Gate In">
+
+                    <div class="progress-dot">
+                        ✓
+                    </div>
+
+                    <div class="progress-label">
+                        Gate In
+                    </div>
+
+                </div>
+
+
+                <div class="progress-line"></div>
+
+
+                <div
+                    class="progress-step"
+                    data-step="Gate Out">
+
+                    <div class="progress-dot">
+                        ✓
+                    </div>
+
+                    <div class="progress-label">
+                        Gate Out
+                    </div>
+
+                </div>
+
+
+                <div class="progress-line"></div>
+
+
+                <div
+                    class="progress-step"
+                    data-step="Complete">
+
+                    <div class="progress-dot">
+                        ✓
+                    </div>
+
+                    <div class="progress-label">
+                        Complete
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             SHIPMENT DETAILS
+        ========================= -->
+
+        <div class="details-section">
+
+            <div class="details-title">
+
+                Shipment Details
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Vessel
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="vessel">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Voyage
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="voyage">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Port of Loading
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="pol">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Port of Discharge
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="pod">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Destination
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="destination">
+                        -
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
     </div>
 
 </div>
@@ -1171,6 +1661,10 @@ async function trackContainer() {
             "none";
 
 
+        /* =========================
+           BASIC INFORMATION
+        ========================= */
+
         document
         .getElementById("showContainer")
         .innerText =
@@ -1207,6 +1701,125 @@ async function trackContainer() {
         .getElementById("nextStep")
         .innerText =
             data.nextStep;
+
+
+        /* =========================
+           SHIPMENT PROGRESS
+        ========================= */
+
+        const steps = [
+
+            "In Transit",
+            "Stacking",
+            "Checking",
+            "Custom Clearance",
+            "Gate In",
+            "Gate Out",
+            "Complete"
+
+        ];
+
+
+        const currentStatus =
+            data.status;
+
+
+        const currentIndex =
+            steps.indexOf(currentStatus);
+
+
+        document
+        .querySelectorAll(".progress-step")
+        .forEach((step, index) => {
+
+
+            step.classList.remove(
+                "completed",
+                "current"
+            );
+
+
+            if (currentIndex >= 0) {
+
+
+                if (index < currentIndex) {
+
+                    step.classList.add(
+                        "completed"
+                    );
+
+                }
+
+
+                else if (index === currentIndex) {
+
+                    step.classList.add(
+                        "current"
+                    );
+
+                }
+
+            }
+
+        });
+
+
+        document
+        .querySelectorAll(".progress-line")
+        .forEach((line, index) => {
+
+
+            line.classList.remove(
+                "completed"
+            );
+
+
+            if (
+                currentIndex >= 0 &&
+                index < currentIndex
+            ) {
+
+                line.classList.add(
+                    "completed"
+                );
+
+            }
+
+        });
+
+
+        /* =========================
+           SHIPMENT DETAILS
+        ========================= */
+
+        document
+        .getElementById("vessel")
+        .innerText =
+            data.vessel || "-";
+
+
+        document
+        .getElementById("voyage")
+        .innerText =
+            data.voyage || "-";
+
+
+        document
+        .getElementById("pol")
+        .innerText =
+            data.pol || "-";
+
+
+        document
+        .getElementById("pod")
+        .innerText =
+            data.pod || "-";
+
+
+        document
+        .getElementById("destination")
+        .innerText =
+            data.destination || "-";
 
 
         resultBox.style.display =
